@@ -22,15 +22,6 @@ jobs:
         run: pip install -r requirements.txt
       - name: Run Double Tests
         run: pytest --spec
-        
-      - name: Checkout system repo
-        uses: actions/checkout@v4
-        with:
-          repository: JeffCompasClassrooms/testing-systems-Za-boss
-      - name: Install requirements
-        run: pip install -r requirements.txt
-      - name: Run System Tests
-        run: pytest --spec
           
       - name: Checkout behave repo
         uses: actions/checkout@v4
@@ -58,4 +49,11 @@ jobs:
         working-directory: testing-2/features
         run: behave
 
-      
+      - name: Checkout system repo
+        uses: actions/checkout@v4
+        with:
+          repository: JeffCompasClassrooms/testing-systems-Za-boss
+      - name: Install requirements
+        run: pip install -r requirements.txt
+      - name: Run System Tests
+        run: pytest --spec
