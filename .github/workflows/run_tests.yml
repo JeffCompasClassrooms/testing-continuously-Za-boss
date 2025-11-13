@@ -23,14 +23,39 @@ jobs:
       - name: Run Double Tests
         run: pytest --spec
         
-      - name: Run system tests
-        run: |
-          echo "Running tests..."
-          # replace this line with your actual test command(s)
+      - name: Checkout system repo
+        uses: actions/checkout@v4
+        with:
+          repository: JeffCompasClassrooms/testing-systems-Za-boss
+      - name: Install requirements
+        run: pip install -r requirements.txt
+      - name: Run System Tests
+        run: pytest --spec
           
-      - name: Run behave tests
-        run: |
-          echo "Running tests..."
-          # replace this line with your actual test command(s)
+      - name: Checkout behave repo
+        uses: actions/checkout@v4
+        with:
+          repository: JeffCompasClassrooms/testing-with-behave-Za-boss
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install requirements
+        run: pip install -r requirements.txt
+
+      - name: set up Chrome
+        uses: browser-actions/setup-chrome@v2
+        with:
+          install-chromedriver: true
+
+      - name: Run behave test suite 1
+        working-directory: testing-1/features
+        run: behave
+
+      - name: Run behave test suite 2
+        working-directory: testing-2/features
+        run: behave
 
       
