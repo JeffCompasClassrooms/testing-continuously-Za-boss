@@ -1,6 +1,8 @@
 name: Test Orchestrator
 
 # Allows a “Run workflow” button in the Actions tab
+
+#I need to look into how to run external workflows, so far the answer seems like it might be just using the api call but idk if that's correct
 on:
   workflow_dispatch: {}
 
@@ -10,9 +12,25 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-
+      
       # ---- your tests go here ----
-      - name: Run test for repo 
+      - name: Checkout double repo
+        uses: actions/checkout@v4 
+        with:
+          repository: JeffCompasClassrooms/testing-with-doubles-Za-boss
+      - name: Install double requirements
+        run: pip install -r requirements.txt
+      - name: Run Double Tests
+        run: pytest --spec
+        
+      - name: Run system tests
         run: |
           echo "Running tests..."
           # replace this line with your actual test command(s)
+          
+      - name: Run behave tests
+        run: |
+          echo "Running tests..."
+          # replace this line with your actual test command(s)
+
+      
